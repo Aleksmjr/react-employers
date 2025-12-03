@@ -27,8 +27,12 @@ class EmployersAddForm extends Component {
           className="add-form d-flex"
           onSubmit={(e) => {
             e.preventDefault();
-            addedItem(name, salary);
-            this.setState({ name: '', salary: '' });
+            if (name.trim().length >= 3) {
+              addedItem(name, salary);
+              this.setState({ name: '', salary: '' });
+            } else {
+              alert('Имя не должно быть менее 3 символов');
+            }
           }}
         >
           <input
@@ -38,6 +42,7 @@ class EmployersAddForm extends Component {
             name="name"
             value={name}
             onChange={this.onValueChange}
+            required
           />
           <input
             type="number"
@@ -46,6 +51,7 @@ class EmployersAddForm extends Component {
             name="salary"
             value={salary}
             onChange={this.onValueChange}
+            required
           />
 
           <button type="submit" className="btn btn-outline-light">
